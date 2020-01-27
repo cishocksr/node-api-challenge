@@ -35,4 +35,4 @@ function validateActionsID(req, res, next) {
   });
 }
 
-module.exports = { validateActionsID, validateProjectID };
+(module.exports = validateActionsID), validateProjectID;

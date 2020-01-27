@@ -1,6 +1,7 @@
 const express = require('express');
 
 const actions = require('../data/helpers/actionModel');
+const validateActionsID = require('../middleware/authentication');
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get('/', (req, res) => {
     );
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', validateActionsID, (req, res) => {
   const { id } = req.params;
   actions
     .get(id)
@@ -40,7 +41,7 @@ router.post('/', (req, res) => {
     );
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateActionsID, (req, res) => {
   const { id } = req.params;
   const { body } = req;
   actions
@@ -53,7 +54,7 @@ router.put('/:id', (req, res) => {
     );
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateActionsID, (req, res) => {
   const { id } = req.params;
   actions
     .remove(id)
@@ -64,3 +65,5 @@ router.delete('/:id', (req, res) => {
       })
     );
 });
+
+module.exports = router;

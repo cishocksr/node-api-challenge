@@ -2,6 +2,8 @@ const express = require('express');
 
 const project = require('../data/helpers/projectModel');
 
+const validateProjectID = require('../middleware/authentication');
+
 const router = express.Router();
 
 router.use(express.json());
@@ -17,7 +19,7 @@ router.get('/', (req, res) => {
     );
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', validateProjectID, (req, res) => {
   const { id } = req.params;
   project
     .get(id)
@@ -40,7 +42,7 @@ router.post('/', (req, res) => {
     );
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateProjectID, (req, res) => {
   const { id } = req.params;
   const { body } = req;
   project
@@ -53,7 +55,7 @@ router.put('/:id', (req, res) => {
     );
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateProjectID, (req, res) => {
   const { id } = req.params;
   project
     .remove(id)
