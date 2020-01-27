@@ -66,4 +66,17 @@ router.delete('/:id', validateProjectID, (req, res) => {
       })
     );
 });
+
+//getProjectActions
+router.get('/:id', validateProjectID, (req, res) => {
+  const { id } = req.params;
+  project
+    .getProjectActions(id)
+    .then(data => res.status(200).json(data))
+    .catch(err =>
+      res.send({
+        error: 'Project Actions not available'
+      })
+    );
+});
 module.exports = router;
